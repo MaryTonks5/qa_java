@@ -17,8 +17,8 @@ public class LionTest {
         } catch (Exception e) {
             assertTrue("Сообщение об ошибке должно содержать 'Используйте допустимые значения'",
                     e.getMessage().contains("Используйте допустимые значения"));
-            assertTrue("Сообщение об ошибке должно содержать 'самей или самка'",
-                    e.getMessage().contains("самей или самка"));
+            assertTrue("Сообщение об ошибке должно содержать 'самец или самка'",
+                    e.getMessage().contains("самец или самка"));
         }
     }
 
