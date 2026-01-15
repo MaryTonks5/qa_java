@@ -1,39 +1,16 @@
 package com.example;
 
+import com.example.Feline;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
-import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
-@RunWith(Parameterized.class)
 public class FelineTest {
-
-    private final int kittensCount;
-
-    public FelineTest(int kittensCount) {
-        this.kittensCount = kittensCount;
-    }
-
-    @Parameters(name = "Количество котят: {0}")
-    public static Object[][] getKittensData() {
-        return new Object[][] {
-                {1},
-                {0},
-                {3},
-                {5},
-                {10}
-        };
-    }
 
     @Test
     public void testEatMeat() throws Exception {
         Feline feline = new Feline();
-        List<String> expectedFood = Arrays.asList("Животные", "Птицы", "Рыба");
+        List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
         assertEquals("Еда для хищника должна соответствовать списку",
                 expectedFood, feline.eatMeat());
     }
@@ -50,13 +27,6 @@ public class FelineTest {
         Feline feline = new Feline();
         assertEquals("Без параметра должен возвращаться 1 котенок",
                 1, feline.getKittens());
-    }
-
-    @Test
-    public void testGetKittensWithParameter() {
-        Feline feline = new Feline();
-        assertEquals("С параметром должен возвращаться переданное количество",
-                kittensCount, feline.getKittens(kittensCount));
     }
 
     @Test

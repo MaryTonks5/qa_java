@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.Animal;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -10,13 +11,12 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
-public class AnimalTest {
-
+public class AnimalParameterizedTest {
     private final String animalKind;
     private final List<String> expectedFood;
     private final boolean shouldThrowException;
 
-    public AnimalTest(String animalKind, List<String> expectedFood, boolean shouldThrowException) {
+    public AnimalParameterizedTest(String animalKind, List<String> expectedFood, boolean shouldThrowException) {
         this.animalKind = animalKind;
         this.expectedFood = expectedFood;
         this.shouldThrowException = shouldThrowException;
@@ -51,18 +51,5 @@ public class AnimalTest {
             assertEquals("Еда для вида " + animalKind + " должна соответствовать ожидаемой",
                     expectedFood, actualFood);
         }
-    }
-
-    @Test
-    public void testGetFamily() {
-        Animal animal = new Animal();
-        String family = animal.getFamily();
-        assertNotNull("Семейство не должно быть null", family);
-        assertTrue("Описание семейства должно содержать несколько семейств",
-                family.contains("несколько семейств"));
-        assertTrue("Описание должно содержать 'кошачьи'",
-                family.contains("кошачьи"));
-        assertTrue("Описание должно содержать 'псовые'",
-                family.contains("псовые"));
     }
 }
