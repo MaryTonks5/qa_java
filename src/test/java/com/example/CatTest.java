@@ -1,7 +1,5 @@
 package com.example;
 
-import com.example.Cat;
-import com.example.Feline;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,13 +16,13 @@ import static org.mockito.Mockito.when;
 public class CatTest {
 
     @Mock
-    Feline feline;
+    private Predator predatorMock;
 
     private Cat cat;
 
     @Before
     public void setUp() {
-        cat = new Cat(feline);
+        cat = new Cat(predatorMock);
     }
 
     @Test
@@ -35,35 +33,36 @@ public class CatTest {
     @Test
     public void testGetFoodReturnsCorrectList() throws Exception {
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
-        when(feline.eatMeat()).thenReturn(expectedFood);
+        when(predatorMock.eatMeat()).thenReturn(expectedFood);
 
         List<String> actualFood = cat.getFood();
-        assertEquals("Еда кота должна совпадать с едой хищника", expectedFood, actualFood);
+        assertEquals("Еда кота должна совпадать с едой хищника",
+                expectedFood, actualFood);
     }
 
     @Test
     public void testGetFoodCallsEatMeatOnce() throws Exception {
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
-        when(feline.eatMeat()).thenReturn(expectedFood);
+        when(predatorMock.eatMeat()).thenReturn(expectedFood);
 
         cat.getFood();
-        Mockito.verify(feline, Mockito.times(1)).eatMeat();
+        Mockito.verify(predatorMock, Mockito.times(1)).eatMeat();
     }
 
     @Test(expected = Exception.class)
     public void testGetFoodThrowsException() throws Exception {
-        when(feline.eatMeat()).thenThrow(new Exception("Ошибка при получении еды"));
+        when(predatorMock.eatMeat()).thenThrow(new Exception("Ошибка при получении еды"));
         cat.getFood();
     }
 
     @Test
     public void testMultipleGetFoodCalls() throws Exception {
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
-        when(feline.eatMeat()).thenReturn(expectedFood);
+        when(predatorMock.eatMeat()).thenReturn(expectedFood);
 
         cat.getFood();
         cat.getFood();
 
-        Mockito.verify(feline, Mockito.times(2)).eatMeat();
+        Mockito.verify(predatorMock, Mockito.times(2)).eatMeat();
     }
 }

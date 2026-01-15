@@ -1,6 +1,5 @@
 package com.example;
 
-import com.example.Feline;
 import org.junit.Test;
 import java.util.List;
 import static org.junit.Assert.*;
@@ -23,20 +22,31 @@ public class FelineTest {
     }
 
     @Test
-    public void testGetKittensWithoutParameter() {
+    public void testGetKittensWithoutParameterReturnsOne() {
         Feline feline = new Feline();
         assertEquals("Без параметра должен возвращаться 1 котенок",
                 1, feline.getKittens());
     }
 
     @Test
-    public void testGetKittensMultipleCalls() {
+    public void testGetKittensWithParameterFive() {
+        Feline feline = new Feline();
+        assertEquals("Вызов getKittens(5) должен вернуть 5",
+                5, feline.getKittens(5));
+    }
+
+    @Test
+    public void testGetKittensFirstCallReturnsOne() {
         Feline feline = new Feline();
         assertEquals("Первый вызов getKittens() должен вернуть 1",
                 1, feline.getKittens());
+    }
+
+    @Test
+    public void testGetKittensSecondCallReturnsOne() {
+        Feline feline = new Feline();
+        feline.getKittens(); // первый вызов
         assertEquals("Второй вызов getKittens() должен вернуть 1",
                 1, feline.getKittens());
-        assertEquals("Вызов getKittens(5) должен вернуть 5",
-                5, feline.getKittens(5));
     }
 }
